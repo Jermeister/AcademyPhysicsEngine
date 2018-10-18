@@ -12,6 +12,7 @@ public class World : MonoBehaviour
 	public int entityCount = 10;
 	public Rect worldBounds = new Rect(-10f, -5f, 20f, 10f);
 	public Vector2 gravity = Vector2.down * 9.81f;
+	public float fluidDensity = 1f;
 
 	[NonSerialized]
 	public Entities entities;
@@ -34,6 +35,7 @@ public class World : MonoBehaviour
 		systems.Add(new CollisionSystem());
 		systems.Add(new WorldBoundsSystem());
 		systems.Add(new RenderingSystem());
+		systems.Add(new BuoyancySystem());
 
 		foreach (var system in systems)
 		{

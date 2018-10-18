@@ -23,6 +23,7 @@ public enum EntityFlags
 	kFlagGravity = 1<<3,
 	kFlagForce = 1<<4,
 	kFlagCollision = 1<<5,
+	kFlagBuoyancy = 1<<6
 }
 
 public struct MoveComponent
@@ -43,6 +44,12 @@ public struct CollisionComponent
 	public float coeffOfRestitution;
 }
 
+public struct BuoyancyComponent
+{
+	public float volume;
+}
+
+
 public class Entities
 {
 	public List<Vector2> positions = new List<Vector2>();
@@ -50,6 +57,7 @@ public class Entities
 	public List<MoveComponent> moveComponents = new List<MoveComponent>();
 	public List<ForceComponent> forceComponents = new List<ForceComponent>();
 	public List<CollisionComponent> collisionComponents = new List<CollisionComponent>();
+	public List<BuoyancyComponent> buoyancyComponents = new List<BuoyancyComponent>();
 
 	public void AddComponent(Entity entity, EntityFlags flag)
 	{
@@ -66,6 +74,7 @@ public class Entities
 		moveComponents.Add(new MoveComponent());
 		forceComponents.Add(new ForceComponent());
 		collisionComponents.Add(new CollisionComponent());
+		buoyancyComponents.Add(new BuoyancyComponent());
 		
 		return new Entity(positions.Count - 1);
 	}
@@ -82,4 +91,5 @@ public class Entities
 			AddEntity(new Vector2(Random.Range(-7.5f, 7.5f), Random.Range(-4f, 4f)));
 		}
 	}
+
 }

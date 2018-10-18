@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class CollisionSystem : ISystemInterface
 {
@@ -20,18 +21,29 @@ public class CollisionSystem : ISystemInterface
             {
                 entities.AddComponent(new Entity(i), EntityFlags.kFlagCollision);
                 var collisionComponent = new CollisionComponent();
+				var buoyancyComponent = new BuoyancyComponent();
 
                 if (entities.forceComponents[i].massInverse > 1e-6f)
                     collisionComponent.radius = 1.0f / entities.forceComponents[i].massInverse;
 
-                collisionComponent.coeffOfRestitution = Random.Range(0.1f, 0.9f);
+                collisionComponent.coeffOfRestitution = UnityEngine.Random.Range(0.1f, 0.9f);
+				buoyancyComponent.volume = ComputeVolume(collisionComponent.radius);
+				Debug.Log(buoyancyComponent.volume);
 
-                entities.collisionComponents[i] = collisionComponent;
-            }
+				entities.collisionComponents[i] = collisionComponent;
+				entities.buoyancyComponents[i] = buoyancyComponent;
+
+			}
         }
     }
 
-    public static bool CirclesCollide(Vector2 pos1, float r1, Vector2 pos2, float r2)
+	float ComputeVolume(float r)
+	{
+		//π * Radius^2
+		return (float)Math.PI * (r * r);
+	}
+
+	public static bool CirclesCollide(Vector2 pos1, float r1, Vector2 pos2, float r2)
     {
         // |pos1 - pos2| <= |r1+r2| is the same as
         // (pos1 - pos2)^2 <= (r1+r2)^2

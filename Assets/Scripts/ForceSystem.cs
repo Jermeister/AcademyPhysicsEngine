@@ -15,7 +15,7 @@ public class ForceSystem : ISystemInterface
             {
                 entities.AddComponent(new Entity(i), EntityFlags.kFlagForce);
 
-                var forceComponent = new ForceComponent() {massInverse = Random.Range(1f, 5f), force = Vector2.zero};
+                var forceComponent = new ForceComponent() {massInverse = 2f, force = Vector2.zero};
                 entities.forceComponents[i] = forceComponent;
             }
         }
