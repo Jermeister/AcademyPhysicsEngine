@@ -11,6 +11,7 @@ public class World : MonoBehaviour
 	public GameObject templateObject;
 	public int entityCount = 10;
 	public Rect worldBounds = new Rect(-10f, -5f, 20f, 10f);
+	public Rect waterBounds = new Rect(-10f, -5f, 20f,	5f);
 	public Vector2 gravity = Vector2.down * 9.81f;
 	public float fluidDensity = 1f;
 
