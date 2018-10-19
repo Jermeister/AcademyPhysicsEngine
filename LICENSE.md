@@ -1,4 +1,4 @@
-Copyright (c) 2018 Mantas Puida
+Copyright (c) 2018 Mantas Puida, Jonas Jermakovičius
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
