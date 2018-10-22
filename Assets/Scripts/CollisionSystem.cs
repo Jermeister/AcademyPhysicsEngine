@@ -26,7 +26,7 @@ public class CollisionSystem : ISystemInterface
                 if (entities.forceComponents[i].massInverse > 1e-6f)
                     collisionComponent.radius = 1.0f / entities.forceComponents[i].massInverse;
 							
-				collisionComponent.coeffOfRestitution = UnityEngine.Random.Range(0.1f, 0.5f);
+				collisionComponent.coeffOfRestitution = UnityEngine.Random.Range(0.1f, 0.1f);
 				buoyancyComponent.volume = ComputeVolume(collisionComponent.radius);
 				//Debug.Log(buoyancyComponent.volume);
 

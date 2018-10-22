@@ -15,7 +15,7 @@ public class BuoyancySystem : ISystemInterface
 				entities.AddComponent(new Entity(i), EntityFlags.kFlagBuoyancy);
 			}
 		}
-		Debug.Log("Buoyancy started");
+		//Debug.Log("Buoyancy started");
         
     }
 
@@ -34,25 +34,24 @@ public class BuoyancySystem : ISystemInterface
 				entities.flags[i].HasFlag(EntityFlags.kFlagBuoyancy))
             {
 				var pos = entities.positions[i];
-				var moveComponent = entities.moveComponents[i];
 				var forceComponent = entities.forceComponents[i];
 				var entityVolume = entities.buoyancyComponents[i].volume;
-				var underWaterVolume = 0.0;
-
-				var radius = 0f;
+				var radius = entities.collisionComponents[i].radius;
+				var areaUnderWater = 0.0;
 				if (pos.y - radius < waterBounds.yMax)
 				{
 					// F = q*V*g
-					underWaterVolume = VolumeUnderWater(entityVolume, entities.collisionComponents[i].radius, pos.y, waterBounds.yMax);
-					forceComponent.force += -gravity * fluidDensity * (float)underWaterVolume;
+					areaUnderWater = CalculateAreaUnderWater(entityVolume, entities.collisionComponents[i].radius, pos.y, waterBounds.yMax);
+					forceComponent.force += -gravity * fluidDensity * (float)areaUnderWater;
+					//Debug.Log("Force: " + forceComponent.force);
+					//Debug.Log(underWaterVolume);
 					entities.forceComponents[i] = forceComponent;
 				}
-
-            }
+			}
         }
     }
 
-	public double VolumeUnderWater(float volume, float radius, float posY, float waterBoundsYMax)
+	public double CalculateAreaUnderWater(float volume, float radius, float posY, float waterBoundsYMax)
 	{
 		float height;
 		if (posY + radius < waterBoundsYMax)

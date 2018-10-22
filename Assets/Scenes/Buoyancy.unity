@@ -169,7 +169,7 @@ MonoBehaviour:
     width: 21
     height: 5
   gravity: {x: 0, y: -9.81}
-  fluidDensity: 1
+  fluidDensity: 0.7
 --- !u!1 &829962721
 GameObject:
   m_ObjectHideFlags: 0

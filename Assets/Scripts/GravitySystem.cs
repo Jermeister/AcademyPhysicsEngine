@@ -33,6 +33,7 @@ public class GravitySystem : ISystemInterface
                 // F = m * g
                 if (forceComponent.massInverse > 1e-6f)
                     forceComponent.force += gravity / forceComponent.massInverse;
+				//Debug.Log("Gravity: " + gravity / forceComponent.massInverse);
                 
                 entities.forceComponents[i] = forceComponent;
             }

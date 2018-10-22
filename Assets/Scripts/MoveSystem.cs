@@ -15,9 +15,6 @@ public class MoveSystem : ISystemInterface
             {
                 entities.AddComponent(new Entity(i), EntityFlags.kFlagMove);
                 
-                var moveComponent = entities.moveComponents[i];
-                moveComponent.velocity = new Vector2(Random.Range(-3f,3f), Random.Range(-3f, 3f));
-                entities.moveComponents[i] = moveComponent;
             }
         }
     }

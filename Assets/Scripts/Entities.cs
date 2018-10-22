@@ -20,10 +20,10 @@ public enum EntityFlags
 	kFlagPosition = 1<<0,
 	kFlagMove = 1<<1,
 	kFlagWorldBounds = 1<<2,
-	kFlagGravity = 1<<3,
-	kFlagForce = 1<<4,
-	kFlagCollision = 1<<5,
-	kFlagBuoyancy = 1<<6
+	kFlagBuoyancy = 1 << 3,
+	kFlagGravity = 1<<4,
+	kFlagForce = 1<<5,
+	kFlagCollision = 1<<6,
 }
 
 public struct MoveComponent
@@ -54,10 +54,10 @@ public class Entities
 {
 	public List<Vector2> positions = new List<Vector2>();
 	public List<EntityFlags> flags = new List<EntityFlags>();
-	public List<MoveComponent> moveComponents = new List<MoveComponent>();
-	public List<ForceComponent> forceComponents = new List<ForceComponent>();
-	public List<CollisionComponent> collisionComponents = new List<CollisionComponent>();
 	public List<BuoyancyComponent> buoyancyComponents = new List<BuoyancyComponent>();
+	public List<ForceComponent> forceComponents = new List<ForceComponent>();
+	public List<MoveComponent> moveComponents = new List<MoveComponent>();
+	public List<CollisionComponent> collisionComponents = new List<CollisionComponent>();
 
 	public void AddComponent(Entity entity, EntityFlags flag)
 	{
@@ -71,10 +71,10 @@ public class Entities
 		flags.Add(EntityFlags.kFlagPosition);
 		
 		// reserve space for all other components
-		moveComponents.Add(new MoveComponent());
-		forceComponents.Add(new ForceComponent());
-		collisionComponents.Add(new CollisionComponent());
 		buoyancyComponents.Add(new BuoyancyComponent());
+		forceComponents.Add(new ForceComponent());
+		moveComponents.Add(new MoveComponent());
+		collisionComponents.Add(new CollisionComponent());
 		
 		return new Entity(positions.Count - 1);
 	}
@@ -88,7 +88,7 @@ public class Entities
 	{
 		for (var i = 0; i < count; i++)
 		{
-			AddEntity(new Vector2(Random.Range(-7.5f, 7.5f), Random.Range(-4f, 4f)));
+			AddEntity(new Vector2(Random.Range(-7.5f, 7.5f), Random.Range(0f, 0.1f)));
 		}
 	}
 
